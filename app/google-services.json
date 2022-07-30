@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "88250231818",
+    "project_id": "techwiztesting",
+    "storage_bucket": "techwiztesting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88250231818:android:391888ab59e04aeecd03f3",
+        "android_client_info": {
+          "package_name": "com.techno.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "88250231818-aghgerncml2qm606cqc8s07ujvofdnam.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1aqGU3I-vg2PU5lEKlYgNbmIWSUWrbeY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "88250231818-aghgerncml2qm606cqc8s07ujvofdnam.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,72 @@
+package com.techno.myapplication.ui.home;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.techno.myapplication.ListviewAdapter;
+import com.techno.myapplication.Listview_Activity;
+import com.techno.myapplication.MainActivity2;
+import com.techno.myapplication.R;
+import com.techno.myapplication.User;
+import java.util.ArrayList;
+
+public class HomeFragment extends Fragment {
+
+    ListView lv;
+    ArrayList<User> data;
+    DatabaseReference db ;
+    ListviewAdapter adapter;
+    View root;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+       root = inflater.inflate(R.layout.listview_content,container,false);
+
+        fetch(container.getContext());
+
+
+        return root;
+    }
+
+    public void fetch(Context c)
+    {
+        data = new ArrayList<>();
+        db = FirebaseDatabase.getInstance("https://techwiz-35f0d-default-rtdb.firebaseio.com/").getReference("Person");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override                        //datatype    variable
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot firedatabase:snapshot.getChildren())
+                {
+                    User u1 = firedatabase.getValue(User.class);
+                    data.add(u1);
+                }
+                adapter = new ListviewAdapter(data, c);
+                lv = root.findViewById(R.id.listview1);
+                lv.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+@Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+}
