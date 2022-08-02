@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,44 +31,44 @@ public class HomeFragment extends Fragment {
 
     ListView lv;
     ArrayList<User> data;
-    DatabaseReference db ;
+   // DatabaseReference db ;
     ListviewAdapter adapter;
     View root;
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-       root = inflater.inflate(R.layout.listview_content,container,false);
-
-        fetch(container.getContext());
-
-
+    //    fetch();
+        root = inflater.inflate(R.layout.fragment_home,container,false);
+  //fetch();
+//        ListviewAdapter adapter = new ListviewAdapter(data,getContext()); //,Listview_Activity.this);
+//        lv.setAdapter(adapter);
         return root;
     }
 
-    public void fetch(Context c)
-    {
-        data = new ArrayList<>();
-        db = FirebaseDatabase.getInstance("https://techwiz-35f0d-default-rtdb.firebaseio.com/").getReference("Person");
-        db.addValueEventListener(new ValueEventListener() {
-            @Override                        //datatype    variable
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//    public void fetch()
+//    {
+//        data = new ArrayList<>();
+//
+//        DatabaseReference  db = FirebaseDatabase.getInstance("https://techwiz-35f0d-default-rtdb.firebaseio.com/").getReference("Person");
+//        db.addValueEventListener(new ValueEventListener() {
+//            @Override                        //datatype    variable
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//
+//                for(DataSnapshot firedata:snapshot.getChildren())
+//                {
+//                    User u1 = firedata.getValue(User.class);
+//                    data.add(u1);
+//                }
+//
+//
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+//    }
 
-                for(DataSnapshot firedatabase:snapshot.getChildren())
-                {
-                    User u1 = firedatabase.getValue(User.class);
-                    data.add(u1);
-                }
-                adapter = new ListviewAdapter(data, c);
-                lv = root.findViewById(R.id.listview1);
-                lv.setAdapter(adapter);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
-@Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 }

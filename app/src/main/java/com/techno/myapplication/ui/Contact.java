@@ -1,5 +1,6 @@
 package com.techno.myapplication.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.techno.myapplication.Listview_Activity;
 import com.techno.myapplication.R;
 import com.techno.myapplication.User;
 
@@ -32,6 +34,7 @@ public class Contact extends Fragment {
         txtContact = root.findViewById(R.id.edit_contact);
         txtPass = root.findViewById(R.id.edit_pass);
         Button btnAdd = root.findViewById(R.id.btnAdd);
+        Button btnshow = root.findViewById(R.id.btn_show);
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,12 +50,16 @@ public class Contact extends Fragment {
                 txtEmail.setText("");
                 txtContact.setText("");
                 txtPass.setText("");
-
-
-
             }
         });
 
+        btnshow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i =new Intent(container.getContext(), Listview_Activity.class);
+                startActivity(i);
+            }
+        });
 
 
         return root;
