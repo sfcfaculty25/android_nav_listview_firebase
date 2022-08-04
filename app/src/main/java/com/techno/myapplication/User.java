@@ -8,18 +8,20 @@ public class User {
     public String email;
     public String pass;
     public String contact;
+    public String imgname;
 
     public User()
     {
     }
 
-    public User(String userId, String fname, String lname, String email, String pass, String contact) {
+    public User(String userId, String fname, String lname, String email, String pass, String contact,String imgname) {
         this.userId = userId;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.pass = pass;
         this.contact = contact;
+        this.imgname = imgname;
     }
 
     public String getUserId() {
@@ -44,5 +46,9 @@ public class User {
 
     public String getContact() {
         return contact;
+    }
+
+    public String getImgname() {
+        return imgname;
     }
 }

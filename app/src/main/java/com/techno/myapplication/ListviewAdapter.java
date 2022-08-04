@@ -1,16 +1,23 @@
 package com.techno.myapplication;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
@@ -18,7 +25,7 @@ public class ListviewAdapter extends BaseAdapter {
 
     ArrayList<User> data;
     Context context;
-
+    StorageReference ref;
 
     public ListviewAdapter(ArrayList<User> data,Context context) {
         this.data = data;
@@ -45,6 +52,8 @@ public class ListviewAdapter extends BaseAdapter {
 
         DatabaseReference db = FirebaseDatabase.getInstance("https://techwiz-35f0d-default-rtdb.firebaseio.com/").getReference("Person");
 
+    ref = FirebaseStorage.getInstance("gs://techwiz-35f0d.appspot.com/").getReference("images/"+data.get(position).getImgname());
+
         root = LayoutInflater.from(context).inflate(R.layout.listview_content,null);
         TextView txtFname = root.findViewById(R.id.txtFname);
         TextView txtLname = root.findViewById(R.id.txtLname);
@@ -53,6 +62,8 @@ public class ListviewAdapter extends BaseAdapter {
         TextView txtPass = root.findViewById(R.id.txtPass);
         Button btnDel = root.findViewById(R.id.btnDel);
         Button btnUp = root.findViewById(R.id.btnUpdate);
+        ImageView imgfetch = root.findViewById(R.id.fetch_img);
+
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,7 +88,18 @@ public class ListviewAdapter extends BaseAdapter {
             }
         });
 
-        txtFname.setText(data.get(position).getFname());
+   //
+
+        ref.getDownloadUrl().addOnSuccessListener((Activity) context, new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(context).load(uri).into(imgfetch);
+
+            }
+        });
+
+     //  txtFname.setText(""+ref.child(""+data.get(position).getImgname()).getDownloadUrl());
+  txtFname.setText(data.get(position).getFname());
         txtLname.setText(data.get(position).getLname());
         txtContact.setText(data.get(position).getContact());
         txtEmail.setText(data.get(position).getEmail());

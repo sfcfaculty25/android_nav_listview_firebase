@@ -6,6 +6,12 @@
     android:orientation="vertical"
     >
 
+    <ImageView
+        android:id="@+id/fetch_img"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        />
+
     <TextView
         android:id="@+id/txtFname"
         android:layout_width="match_parent"
